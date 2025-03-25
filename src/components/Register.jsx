@@ -116,7 +116,7 @@ export const Register = ({ switchAuthHandler }) => {
           type="password"
           onBlurHandler={handleInputValidationOnBlur}
           showErrorMessage={formState.password.showError}
-          validationMessage={validatePasswordMessage}
+          validationMessage={validatePasswordConfirmMessage}
         />
       </form>
     </div>
