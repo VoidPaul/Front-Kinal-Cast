@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
 export const Input = ({
   field,
@@ -12,8 +12,33 @@ export const Input = ({
   onBlurHandler,
   textArea,
 }) => {
+  const handleValueChange = (event) => {
+    onChangeHandler(event.target.value, field)
+  }
+
+  const handleInputBlur = (event) => {
+    onBlurHandler(event.target.value, field)
+  }
+
   return (
-    <div>Input</div>
+    <>
+      <div className="auth-form-lable">
+        <span>{label}</span>
+      </div>
+      {textArea ? (
+        <textarea
+          type={type}
+          value={value}
+          onChange={handleValueChange}
+          onBlur={handleInputBlur}
+          rows={5}
+          style={{ maxWidth: "400px" }}
+        />
+      ) : (
+        <input type={type} value={value} onChange={handleValueChange} onBlur={handleInputBlur} />
+      )}
+      <span className="auth-form-validation-message">{showErrorMessage && validationMessage}</span>
+    </>
   )
 }
 
