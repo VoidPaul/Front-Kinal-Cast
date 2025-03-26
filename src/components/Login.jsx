@@ -68,7 +68,7 @@ export const Login = ({ switchAuthHandler }) => {
 
   return (
     <div className="login-container">
-      <Logo text={"Formulario de registro"} />
+      <Logo text={"Inicio de Sesión"} />
       <form className="auth-form">
         <Input
           field="email"
@@ -90,6 +90,7 @@ export const Login = ({ switchAuthHandler }) => {
           showErrorMessage={formState.password.showError}
           validationMessage={validatePasswordMessage}
         />
+        <button className="auth-form-button">Iniciar Sesión</button>
       </form>
       <span onClick={switchAuthHandler} className="auth-form-switch-label">
         ¿Aún no tienes una cuenta? ¡Regístrate ahora!

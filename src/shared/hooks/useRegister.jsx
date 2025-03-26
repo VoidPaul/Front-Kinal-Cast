@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { register as registerRequest } from "../services/api"
+import { register as registerRequest } from "../../services/api"
 import toast from "react-hot-toast"
 
 export const useRegister = () => {
@@ -14,6 +14,8 @@ export const useRegister = () => {
 
     if (response.error) {
       toast.error(response.err?.response?.data || "Error al registrar usuario")
+    } else {
+      toast.success(response.data.msg)
     }
 
     const { userDetails } = response.data
@@ -21,7 +23,7 @@ export const useRegister = () => {
     localStorage.setItem("user", JSON.stringify(userDetails))
     navigate("/")
   }
-  
+
   return {
     isLoading,
     register,
