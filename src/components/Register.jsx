@@ -11,6 +11,7 @@ import {
   validatePasswordConfirmMessage,
   validateUsernameMessage,
 } from "../shared/validators"
+import { Logo } from "./Logo"
 
 export const Register = ({ switchAuthHandler }) => {
   const [formState, setFormState] = useState({
@@ -77,13 +78,14 @@ export const Register = ({ switchAuthHandler }) => {
 
   return (
     <div className="register-container">
+      <Logo text={"Formulario de registro"} />
       <form className="auth-form">
         <Input
           field="email"
           label="Email"
           value={formState.email.value}
           onChangeHandler={handleInputValueChange}
-          type="email"
+          type="text"
           onBlurHandler={handleInputValidationOnBlur}
           showErrorMessage={formState.email.showError}
           validationMessage={validateEmailMessage}
@@ -93,7 +95,7 @@ export const Register = ({ switchAuthHandler }) => {
           label="Username"
           value={formState.username.value}
           onChangeHandler={handleInputValueChange}
-          type="username"
+          type="text"
           onBlurHandler={handleInputValidationOnBlur}
           showErrorMessage={formState.username.showError}
           validationMessage={validateUsernameMessage}
@@ -109,16 +111,19 @@ export const Register = ({ switchAuthHandler }) => {
           validationMessage={validatePasswordMessage}
         />
         <Input
-          field="password"
-          label="Password"
-          value={formState.password.value}
+          field="passwordConfirm"
+          label="Password Confirmation"
+          value={formState.passwordConf.value}
           onChangeHandler={handleInputValueChange}
           type="password"
           onBlurHandler={handleInputValidationOnBlur}
-          showErrorMessage={formState.password.showError}
+          showErrorMessage={formState.passwordConf.showError}
           validationMessage={validatePasswordConfirmMessage}
         />
       </form>
+      <span onClick={switchAuthHandler} className="auth-form-switch-label">
+        ¿Ya tienes una cuenta?... ¡Inicia sesión acá!
+      </span>
     </div>
   )
 }
