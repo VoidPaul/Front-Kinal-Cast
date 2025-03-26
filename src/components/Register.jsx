@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types"
 import { Input } from "./Input";
+import { Logo } from "./Logo";
 import { 
   validateEmail,
   validatePassword,
@@ -11,8 +12,11 @@ import {
   validatePasswordConfirmMessage,
   validateUsernameMessage
 } from "../shared/validators";
+import { useRegister } from "../shared/hooks/useRegister";
 
 export const Register = ({switchAuthHandler}) => {
+  const { register, isLoading} = useRegister()
+
   const [formState, setFormState] = useState({
     email:{
       value:"",
@@ -46,6 +50,11 @@ export const Register = ({switchAuthHandler}) => {
     }))
   }
 
+  const handleRegister = (event) => {
+    event.preventDefault()
+    register(formState.email.value, formState.password.value, formState.username.value)
+  }
+
   const handleInputValidationOnBlur = (value, field) => {
     let isValid = false
     switch(field){
@@ -55,7 +64,7 @@ export const Register = ({switchAuthHandler}) => {
       case "password":
         isValid = validatePassword(value)
         break
-      case "passwordConfirm":
+      case "passwordConf":
         isValid = validatePasswordConfirm(formState.password.value, value)
         break
       case "username":
@@ -73,8 +82,17 @@ export const Register = ({switchAuthHandler}) => {
       }
     }))
   }
+
+  const isSubmitDisabled = 
+                isLoading || 
+                !formState.email.isValid ||
+                !formState.password.isValid ||
+                !formState.passwordConf.isValid ||
+                !formState.username.isValid
+
   return (
     <div className="register-container">
+      <Logo text={"Formulario de registro"}/>
       <form className="auth-form">
         <Input
           field="email"
@@ -107,7 +125,7 @@ export const Register = ({switchAuthHandler}) => {
           validationMessage={validatePasswordMessage}
         />
         <Input
-          field="passwordConfirm"
+          field="passwordConf"
           label="Password Confirmation"
           value={formState.passwordConf.value}
           onChangeHandler={handleInputValueChange}
@@ -116,6 +134,9 @@ export const Register = ({switchAuthHandler}) => {
           showErrorMessage={formState.passwordConf.showError}
           validationMessage={validatePasswordConfirmMessage}
         />
+        <button onClick={handleRegister} disabled={isSubmitDisabled}>
+          Crear cuenta
+        </button>
       </form>
         <span onClick={switchAuthHandler} className="auth-form-switch-label">
         ¿Ya tienes una cuenta?... ¡Inicia sesión acá!
