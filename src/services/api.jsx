@@ -16,3 +16,25 @@ export const register = async (data) => {
     }
   }
 }
+
+export const login = async (data) => {
+  try {
+    return await apiClient.post("/auth/login", data)
+  } catch (err) {
+    return {
+      error: true,
+      err,
+    }
+  }
+}
+
+export const getChannels = async () => {
+  try {
+    return await apiClient.get("/channels")
+  } catch (err) {
+    return {
+      error: true,
+      err,
+    }
+  }
+}

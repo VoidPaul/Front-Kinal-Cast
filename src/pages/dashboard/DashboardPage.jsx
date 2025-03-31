@@ -1,7 +1,14 @@
-import React from 'react'
+import React from "react"
+import { Navbar } from "../../components/navs/Navbar"
+import { Content } from "../../components/dashboard/Content"
+
+import "./dashboardPage.css"
 
 export const DashboardPage = () => {
   return (
-    <div>Hola estoy en el Dashboard</div>
+    <div className="dashboard-container">
+      <div className="dashboard-background" />
+      <Navbar />
+    </div>
   )
 }
