@@ -5,13 +5,13 @@ import { Logo } from "./Logo";
 import {
   validateEmail,
   validatePassword,
-  valideEmailMessage,
+  validateEmailMessage,
   validatePasswordMessage,
-} from "../shared/validators";
-import { useLogin } from "../shared/hooks";
+} from "../shared/validators"
+import { useLogin } from "../shared/hooks"
 
 export const Login = ({ switchAuthHandler }) => {
-  const { login, isLoading } = useLogin();
+  const { login, isLoading } = useLogin()
 
   const [formState, setFormState] = useState({
     email: {
@@ -24,7 +24,7 @@ export const Login = ({ switchAuthHandler }) => {
       isValid: false,
       showError: false,
     },
-  });
+  })
 
   const handleInputValueChange = (value, field) => {
     setFormState((prevState) => ({
@@ -33,29 +33,29 @@ export const Login = ({ switchAuthHandler }) => {
         ...prevState[field],
         value,
       },
-    }));
-  };
+    }))
+  }
 
   const handleLogin = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    login(formState.email.value, formState.password.value);
-  };
+    login(formState.email.value, formState.password.value)
+  }
 
   const isSubmitButtonDisabled =
-    isLoading || !formState.password.isValid || !formState.email.isValid;
+    isLoading || !formState.password.isValid || !formState.email.isValid
 
   const handleInputValidationOnBlur = (value, field) => {
-    let isValid = false;
+    let isValid = false
     switch (field) {
       case "email":
-        isValid = validateEmail(value);
-        break;
+        isValid = validateEmail(value)
+        break
       case "password":
-        isValid = validatePassword(value);
-        break;
+        isValid = validatePassword(value)
+        break
       default:
-        break;
+        break
     }
     setFormState((prevState) => ({
       ...prevState,
@@ -64,8 +64,8 @@ export const Login = ({ switchAuthHandler }) => {
         isValid,
         showError: !isValid,
       },
-    }));
-  };
+    }))
+  }
   return (
     <div className="login-container">
       <Logo text={"Inicio de sesión"} />
@@ -78,7 +78,7 @@ export const Login = ({ switchAuthHandler }) => {
           type="text"
           onBlurHandler={handleInputValidationOnBlur}
           showErrorMessage={formState.email.showError}
-          validationMessage={valideEmailMessage}
+          validationMessage={validateEmailMessage}
         />
         <Input
           field="password"
@@ -98,8 +98,8 @@ export const Login = ({ switchAuthHandler }) => {
         ¿Aún no tienes una cuenta?... ¡Regístrate acá!
       </span>
     </div>
-  );
-};
+  )
+}
 
 Login.propTypes = {
   switchAuthHandler: PropTypes.func.isRequired,

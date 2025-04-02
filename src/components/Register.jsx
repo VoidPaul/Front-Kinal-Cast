@@ -7,7 +7,7 @@ import {
   validatePassword,
   validatePasswordConfirm,
   validateUsername,
-  valideEmailMessage,
+  validateEmailMessage,
   validatePasswordMessage,
   validatePasswordConfirmMessage,
   validateUsernameMessage,
@@ -102,7 +102,7 @@ export const Register = ({ switchAuthHandler }) => {
           type="text"
           onBlurHandler={handleInputValidationOnBlur}
           showErrorMessage={formState.email.showError}
-          validationMessage={valideEmailMessage}
+          validationMessage={validateEmailMessage}
         />
         <Input
           field="username"
