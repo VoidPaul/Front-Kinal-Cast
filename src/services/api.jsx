@@ -53,3 +53,6 @@ export const getChannels = async () => {
     }
   }
 }
+
+export const getFollowedChannels = async () => {
+}
