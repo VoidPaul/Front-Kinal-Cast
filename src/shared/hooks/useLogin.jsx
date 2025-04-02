@@ -23,9 +23,9 @@ export const useLogin = () => {
             toast.success(response.data.msg)
         }
 
-        const { token } = response.data.userDetails
+        const { userDetails } = response.data
 
-        localStorage.setItem("token", token)
+        localStorage.setItem("user", JSON.stringify(userDetails))
 
         navigate("/")
     }
