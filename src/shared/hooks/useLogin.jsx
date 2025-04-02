@@ -25,7 +25,7 @@ export const useLogin = () => {
   }
 
   return {
-    isLoading,
-    login
+    login,
+    isLoading
   }
 }

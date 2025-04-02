@@ -9,15 +9,16 @@ export const DashboardPage = () => {
   const { getChannels, allChannels } = useChannels()
   const { isLogged } = useUserDetails()
 
-  useEffect(() => {
+  useEffect(() =>{
     getChannels(isLogged)
-  })
+  },[getChannels,isLogged])
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-background" />
-      <Navbar />
-      <Content channels={allChannels} />
+    <div className='dashboard-container'>
+      <div className='dashboard-background'/>
+      <Navbar/>
+      <Content channels={allChannels}/>
     </div>
   )
 }
+

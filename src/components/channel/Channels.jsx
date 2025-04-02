@@ -27,5 +27,5 @@ Channels.propTypes = {
       isOnline: PropTypes.bool.isRequired,
       avatarUrl: PropTypes.string,
     })
-  ),
+  ).isRequired,
 }

@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { logout as logoutHandler } from "./useLogout"
 
 const getUserDetails = () => {
   const userDetails = localStorage.getItem("user")
-
   if (userDetails) {
     return JSON.parse(userDetails)
   }
-
   return null
 }
 
@@ -15,8 +13,7 @@ export const useUserDetails = () => {
   const [userDetails, setUserDetails] = useState(getUserDetails())
 
   useEffect(() => {
-    logoutHandler()
-    setUserDetails(null)
+    setUserDetails(getUserDetails())
   }, [])
 
   const logout = () => {

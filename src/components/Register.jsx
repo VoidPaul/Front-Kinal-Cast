@@ -7,7 +7,7 @@ import {
   validatePassword,
   validatePasswordConfirm,
   validateUsername,
-  validateEmailMessage,
+  valideEmailMessage,
   validatePasswordMessage,
   validatePasswordConfirmMessage,
   validateUsernameMessage,
@@ -16,6 +16,7 @@ import { useRegister } from "../shared/hooks/useRegister"
 
 export const Register = ({ switchAuthHandler }) => {
   const { register, isLoading } = useRegister()
+
   const [formState, setFormState] = useState({
     email: {
       value: "",
@@ -51,7 +52,6 @@ export const Register = ({ switchAuthHandler }) => {
 
   const handleRegister = (event) => {
     event.preventDefault()
-
     register(formState.email.value, formState.password.value, formState.username.value)
   }
 
@@ -73,7 +73,6 @@ export const Register = ({ switchAuthHandler }) => {
       default:
         break
     }
-
     setFormState((prevState) => ({
       ...prevState,
       [field]: {
@@ -103,7 +102,7 @@ export const Register = ({ switchAuthHandler }) => {
           type="text"
           onBlurHandler={handleInputValidationOnBlur}
           showErrorMessage={formState.email.showError}
-          validationMessage={validateEmailMessage}
+          validationMessage={valideEmailMessage}
         />
         <Input
           field="username"
@@ -136,7 +135,7 @@ export const Register = ({ switchAuthHandler }) => {
           validationMessage={validatePasswordConfirmMessage}
         />
         <button onClick={handleRegister} disabled={isSubmitDisabled}>
-          Registrarse
+          Crear cuenta
         </button>
       </form>
       <span onClick={switchAuthHandler} className="auth-form-switch-label">

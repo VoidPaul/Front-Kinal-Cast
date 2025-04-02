@@ -6,6 +6,21 @@ const apiClient = axios.create({
   httpsAgent: false,
 })
 
+apiClient.interceptors.request.use(
+  (config) => {
+    const userDetails = localStorage.getItem("user")
+
+    if (userDetails) {
+      const token = JSON.parse(userDetails).token
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (err) => {
+    return Promise.reject(err)
+  }
+)
+
 export const register = async (data) => {
   try {
     return await apiClient.post("/auth/register", data)
@@ -34,7 +49,7 @@ export const getChannels = async () => {
   } catch (err) {
     return {
       error: true,
-      err,
+      err: err,
     }
   }
 }
