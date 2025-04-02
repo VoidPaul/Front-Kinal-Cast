@@ -18,7 +18,8 @@ export const useChannels = () => {
     }, []);
     
     useEffect(() => {
-    }, [channels]);
+        getChannels();
+    }, [getChannels]);
 
     return {
         getChannels,
