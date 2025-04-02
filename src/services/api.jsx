@@ -1,4 +1,5 @@
 import axios from "axios";
+import {logout} from '../shared/hooks/useLogout'
 
 const apiClient = axios.create({
   baseURL: "http://localhost:3001/kinalCast/v2",
@@ -53,3 +54,24 @@ export const getChannels = async () => {
     };
   }
 };
+
+export const getFollowedChannels = async () => {
+  try{
+    return await apiClient.get('/channels/followed')
+  }catch(e){
+    checkResponseStatus(e)
+    return{
+      error: true,
+      e: e
+    }
+  }
+}
+
+const checkResponseStatus = (e) => {
+  const responseStatus = e?.response?.status
+
+  if(responseStatus){
+    (responseStatus === 401 || responseStatus === 403) && logout()
+  }
+}
+
