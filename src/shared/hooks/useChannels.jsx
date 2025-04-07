@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useSyncExternalStore } from "react"
+import { useState, useEffect, useCallback } from "react"
 import toast from "react-hot-toast"
-import { getChannels as getChannelsRequest, getFollowedChannels } from "../../services"
+import { getChannels as getChannelsRequest, getFollowedChannels as getFollowedChannelsRequest } from "../../services"
 
 export const useChannels = () => {
   const [channels, setChannels] = useState([])
