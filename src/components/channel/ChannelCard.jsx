@@ -21,9 +21,14 @@ export const ChannelCard = ({
     username,
     isOnline,
     avatarUrl,
+    id,
+    navigateToChannelHandler
 }) => {
+    const handleNavigate = () =>{
+        navigateToChannelHandler(id)
+    }
   return (
-    <div className='channels-card'>
+    <div className='channels-card' onClick={handleNavigate}>
         <ChannelAvatar url={avatarUrl}/>
         <span className='channels-card-title'>{title}</span>
         <span className='channels-card-title'>{username}</span>
@@ -39,8 +44,9 @@ export const ChannelCard = ({
 
 ChannelCard.propTypes = {
     title: PropTypes.string.isRequired,
-    //id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     username: PropTypes.string.isRequired,
     isOnline: PropTypes.bool.isRequired,
     avatarUrl: PropTypes.string.isRequired,
+    navigateToChannelHandler: PropTypes.func.isRequired
 }
