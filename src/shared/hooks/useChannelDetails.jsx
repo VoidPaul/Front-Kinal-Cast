@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import toast from "react-hot-toast"
 import { getChannelDetails as getChannelDetailsRequest } from "../../services"
 
@@ -12,22 +12,24 @@ const initialChannelDetails = {
 }
 
 export const useChannelDetails = () => {
-  const [channelDetails, setChannelDetails] = useState(initialChannelDetails)
+  const [channelDetails, setChannelDetails] = useState(initialChannelDetails);
 
-  const getChannelDetails = async (id) => {
+  const getChannelDetails = useCallback(async (id) => {
     try {
-      const response = await getChannelDetailsRequest(id)
+      const response = await getChannelDetailsRequest(id);
 
       if (response.error) {
-        return toast.error(response.e?.response?.data || "Error al obtener la información del canal.")
+        return toast.error(
+          response.e?.response?.data ||
+          "Error al obtener la información del canal"
+        )
       }
 
-      setChannelDetails(response.data)
-
-    } catch (err) {
-      toast.error("No se pudo obtener la información del canal", err)
+      setChannelDetails(response.data);
+    } catch (error) {
+      toast.error("No se pudo obtener la información del canal", error);
     }
-  }
+  }, [])
 
   return {
     channelDetails,

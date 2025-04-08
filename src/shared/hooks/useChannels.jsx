@@ -1,42 +1,49 @@
-import { useState, useEffect, useCallback } from "react"
-import toast from "react-hot-toast"
-import { getChannels as getChannelsRequest, getFollowedChannels as getFollowedChannelsRequest } from "../../services"
+import { useState, useEffect, useCallback } from "react";
+import toast from "react-hot-toast";
+import { getFollowedChannels, getChannels as getChannelsRequest } from "../../services";
 
 export const useChannels = () => {
-  const [channels, setChannels] = useState([])
+  const [channels, setChannels] = useState([]);
   const [followedChannels, setFollowedChannels] = useState([])
   const [isFetching, setIsFetching] = useState(false)
 
   const getChannels = useCallback(async (isLogged = false) => {
-    const channelsData = await getChannelsRequest()
+    setIsFetching(true)
+    const channelsData = await getChannelsRequest();
 
     if (channelsData.error) {
-      toast.error(channelsData.err?.response?.data || "Error al obtener los canales")
+      toast.error(channelsData.e?.response?.data || "Error al obtener los canales")
       setIsFetching(false)
       return
     }
 
-    setChannels(channelsData.data.channels)
+    setChannels(channelsData.data.channels);
 
     if (isLogged) {
-      const followedChannelsData = await getFollowedChannelsRequest()
+      const followedChannelsData = await getFollowedChannels()
 
       if (followedChannelsData.error) {
-        toast.error(followedChannelsData.error?.response?.data || "Error al obtener los canales seguidos.")
+        toast.error(
+          followedChannelsData.error?.response?.data || "Error al obtener los followed channels"
+        )
       } else {
-        setFollowedChannels(channelsData.data.channels.filter((channel) => followedChannelsData.data.followedChannels.includes(channel.id)))
+        setFollowedChannels(
+          channelsData.data.channels.filter((channel) =>
+            followedChannelsData.data.followedChannels.includes(channel.id))
+        )
       }
     }
-  }, [])
+    setIsFetching(false)
+  }, []);
 
   useEffect(() => {
-    getChannels()
-  }, [getChannels])
+    getChannels();
+  }, [getChannels]);
 
   return {
     getChannels,
     isFetching,
     allChannels: channels,
     followedChannels
-  }
-}
+  };
+};

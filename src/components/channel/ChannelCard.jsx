@@ -6,8 +6,8 @@ const imageUrl = "https://static.vecteezy.com/system/resources/previews/000/442/
 const ChannelAvatar = ({ url }) => {
   const displayUrl = url !== "none" ? url : imageUrl
   return (
-    <div className="channels-avatar-container">
-      <img src={displayUrl} alt="Channel-avatar" width="100%" height="100%"/>
+    <div className='channels-avatar-container'>
+      <img src={displayUrl} alt="Channel-avatar" width="100%" height="100%" />
     </div>
   )
 }
@@ -18,19 +18,23 @@ ChannelAvatar.propTypes = {
 
 export const ChannelCard = ({
   title,
-  // id,
   username,
   isOnline,
-  avatarUrl
+  avatarUrl,
+  id,
+  navigateToChannelHandler
 }) => {
+  const handleNavigate = () => {
+    navigateToChannelHandler(id)
+  }
   return (
-    <div className="channels-card">
-      <ChannelAvatar url={avatarUrl}/>
-      <span className="channels-card-title">{title}</span>
-      <span className="channels-card-title">{username}</span>
+    <div className='channels-card' onClick={handleNavigate}>
+      <ChannelAvatar url={avatarUrl} />
+      <span className='channels-card-title'>{title}</span>
+      <span className='channels-card-title'>{username}</span>
       <span
-        className="channels-card-title"
-        style={{color: isOnline ? "green" : "red"}}
+        className='channels-card-title'
+        style={{ color: isOnline ? "green" : "red" }}
       >
         {isOnline ? "Online" : "Offline"}
       </span>
@@ -38,10 +42,15 @@ export const ChannelCard = ({
   )
 }
 
-ChannelCard.proptypes = {
+ChannelAvatar.propTypes = {
+  url: PropTypes.string.isRequired
+}
+
+ChannelCard.propTypes = {
   title: PropTypes.string.isRequired,
-  // id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   username: PropTypes.string.isRequired,
   isOnline: PropTypes.bool.isRequired,
   avatarUrl: PropTypes.string.isRequired,
+  navigateToChannelHandler: PropTypes.func.isRequired
 }

@@ -1,15 +1,17 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Route, Routes } from "react-router-dom"
-import { Channels } from "../channel/Channels"
-import { Settings } from "../settings/Settings"
+import { Channels } from '../channel/Channels'
+import { Settings } from '../settings/Settings'
+import { ChannelView } from '../channel/ChannelView'
 
-export const Content = ({ channels }) => {
+export const Content = ({ channels, getChannels }) => {
   return (
-    <div className="content-container">
+    <div className='content-container'>
       <Routes>
-        <Route path="settings" element={<Settings />} />
-        <Route path="channels" element={<Channels channels={channels} />} />
+        <Route path='settings' element={<Settings />} />
+        <Route path='channels' element={<Channels channels={channels} />} />
+        <Route path='channel/:id' element={<ChannelView getChannels={getChannels} />} />
       </Routes>
     </div>
   )
@@ -22,7 +24,8 @@ Content.propTypes = {
       title: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
       isOnline: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string,
+      avatarUrl: PropTypes.string
     })
   ).isRequired,
+  getChannels: PropTypes.func.isRequired
 }
