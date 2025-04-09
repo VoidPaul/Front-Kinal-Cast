@@ -11,9 +11,14 @@ const FollowButton = ({ channelId, getChannels }) => {
 
   return (
     <button onClick={handleFollowChannel} className='channel-follow-button'>
-      Seguit Canal
+      Seguir Canal
     </button>
   )
+}
+
+FollowButton.propTypes = {
+  channelId: PropTypes.string.isRequired,
+  getChannels: PropTypes.func.isRequired,
 }
 
 export const ChannelDescription = ({
@@ -27,12 +32,11 @@ export const ChannelDescription = ({
 
   return (
     <div className='channel-description-container'>
-      <span className='channel-description-title'>{username}
+      <span className='channel-description-title'>
+        {username}
         <span>
           {isLogged && (
-            <FollowButton
-              channelId={channelId}
-              getChannels={getChannels}
+            <FollowButton channelId={channelId} getChannels={getChannels}
             />
           )}
         </span>
@@ -55,5 +59,5 @@ ChannelDescription.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   channelId: PropTypes.string.isRequired,
-  getChannels: PropTypes.func.isRequired
+  getChannels: PropTypes.func.isRequired,
 }

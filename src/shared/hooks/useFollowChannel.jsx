@@ -12,4 +12,8 @@ export const useFollowChannel = () => {
     toast.success("Ahora sigues este canal")
     onSuccess(true)
   }
+
+  return {
+    followChannel
+  }
 }
